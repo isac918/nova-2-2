@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NOVA 2.2</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background: #02050a;
+      color: #00eaff;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .hud {
+      width: 92%;
+      max-width: 430px;
+      text-align: center;
+      padding: 25px;
+      border: 1px solid #00eaff;
+      border-radius: 25px;
+      box-shadow: 0 0 25px #00eaff55;
+      background: #02070dcc;
+    }
+
+    h1 {
+      font-size: 32px;
+      letter-spacing: 6px;
+      margin-bottom: 8px;
+    }
+
+    .status {
+      font-size: 13px;
+      margin-bottom: 30px;
+      color: #7ff7ff;
+    }
+
+    .core {
+      width: 210px;
+      height: 210px;
+      margin: auto;
+      border: 3px solid #00eaff;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      box-shadow:
+        0 0 15px #00eaff,
+        0 0 45px #00eaff55;
+      animation: pulse 2s infinite;
+    }
+
+    .core::before,
+    .core::after {
+      content: "";
+      position: absolute;
+      border: 1px solid #00eaff;
+      border-radius: 50%;
+    }
+
+    .core::before {
+      width: 160px;
+      height: 160px;
+    }
+
+    .core::after {
+      width: 120px;
+      height: 120px;
+    }
+
+    .eye {
+      width: 55px;
+      height: 55px;
+      background: #00eaff;
+      border-radius: 50%;
+      box-shadow: 0 0 30px #00eaff;
+      z-index: 2;
+    }
+
+    .message {
+      margin-top: 25px;
+      min-height: 45px;
+      font-size: 15px;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 13px 25px;
+      border: 1px solid #00eaff;
+      border-radius: 30px;
+      background: transparent;
+      color: #00eaff;
+      font-size: 15px;
+      cursor: pointer;
+      box-shadow: 0 0 15px #00eaff33;
+    }
+
+    button:active {
+      transform: scale(.96);
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.04);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="hud">
+    <h1>NOVA 2.2</h1>
+
+    <div class="status">
+      ● TODOS OS SISTEMAS ONLINE
+    </div>
+
+    <div class="core">
+      <div class="eye"></div>
+    </div>
+
+    <div class="message" id="message">
+      Aguardando comando, senhor Isac.
+    </div>
+
+    <button onclick="iniciarNOVA()">
+      ATIVAR NOVA
+    </button>
+  </main>
+
+  <script>
+    function falar(texto) {
+      if ("speechSynthesis" in window) {
+        speechSynthesis.cancel();
+
+        const voz = new SpeechSynthesisUtterance(texto);
+        voz.lang = "pt-BR";
+        voz.rate = 0.9;
+        voz.pitch = 0.9;
+
+        speechSynthesis.speak(voz);
+      }
+    }
+
+    function iniciarNOVA() {
+      const mensagem = document.getElementById("message");
+
+      mensagem.textContent =
+        "NOVA ativada. Sistema pronto para receber comandos.";
+
+      falar(
+        "Seja bem-vindo, senhor Isac. NOVA dois ponto dois está online."
+      );
+    }
+  </script>
+
+</body>
+  </html>
